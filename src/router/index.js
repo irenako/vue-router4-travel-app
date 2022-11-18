@@ -8,16 +8,26 @@ const routes = [
   path: "/",
   name: "home",
   component: HomeView,
+  alias: "/home"
  },
  {
-   path: '/protected', name: 'protected', component: () => import('../views/ProtectedView.vue'), meta: {
+   path: '/protected', name: 'protected', component: {
+     default: () => import('../views/ProtectedView.vue'), LeftSidebar: () => import('../components/LeftSidebar.vue')
+}, meta: {
      requiresAuth: true
    }
  },
   { path: '/login', name: 'login', component: () => import('../views/LoginView.vue') },
-  { path: '/invoices', name: 'invoices', component: () => import('../views/InvoicesView.vue'), meta: {
+  {
+    path: '/invoices', name: 'invoices', component: {
+      default: () => import('../views/InvoicesView.vue'), LeftSidebar: () => import('../components/LeftSidebar.vue')
+    }, meta: {
     requiresAuth: true
-  } },,
+  } },
+  {
+    path: "/example/:id(\\d+)?",
+    component: () => import("../views/LoginView.vue")
+  },
   { path: '/destination/:id/:slug', 
   name: 'destination.show', 
   component: () => import('../views/DestinationShow.vue'), 
