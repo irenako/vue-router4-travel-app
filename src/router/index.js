@@ -1,10 +1,6 @@
 /* eslint-disable */
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import BrazilView from "../views/BrazilView.vue";
-import PanamaView from "../views/PanamaView.vue";
-import JamaicaView from "../views/JamaicaView.vue";
-import HavaiiView from "../views/HavaiiView.vue";
 
 const routes = [
  {
@@ -12,26 +8,7 @@ const routes = [
   name: "home",
   component: HomeView,
  },
- {
-  path: "/brazil",
-  name: "brazil",
-  component: BrazilView,
- },
- {
-  path: "/panama",
-  name: "panama",
-  component: PanamaView,
- },
- {
-  path: "/jamaica",
-  name: "jamaica",
-  component: JamaicaView,
- },
- {
-  path: "/havaii",
-  name: "havaii",
-  component: HavaiiView,
- },
+  { path: '/destination/:id/:slug', name: 'destination.show', component: () => import('../views/DestinationShow.vue'), props: route => ({ ...route.params, id: parseInt(route.params.id) }), children: [{ path: ':experienceSlug', name: 'experience.show', component: () => import('../views/ExperienceShow.vue'), props: route => ({ ...route.params, id: parseInt(route.params.id) }) }]},
 ];
 
 const router = createRouter({
